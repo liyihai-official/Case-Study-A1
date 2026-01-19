@@ -17,17 +17,14 @@
 #include <iostream> // Necessary IO streams
 
 ///
-/// V: Vector size
-/// N: Matrix Col size
-/// M: Matrix Row size
+/// MATC: Matrix Col size
+/// MATR: Matrix Row size
 /// 
-#undef V
-#undef N
-#undef M
+#undef MATC
+#undef MATR
 
-#define V 100   // Vector size
-#define N 1000  // Matrix Col size
-#define M 10000 // Matrix Row 
+#define MATC 1000  // Matrix Col size
+#define MATR 10000 // Matrix Row 
 
 
 ///
