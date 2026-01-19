@@ -18,7 +18,6 @@ set(CXX_COMPILER_PATH ${CMAKE_CXX_COMPILER})
 
 set(PROJECT_SOURCES 
   test.cc 
-  # 这里可以添加其他 .cc 文件
 )
 
 # Compile Flags
@@ -29,7 +28,7 @@ add_executable(TEST test.cc ${PROJECT_SOURCES})
 
 # Link MPI
 if(MPI_FOUND)
-  target_link_libraries(TEST PRIVATE MPI::MPI_CXX) # 这会自动处理 include 路径和链接库 flags
+  target_link_libraries(TEST PRIVATE MPI::MPI_CXX)
 endif()
 
 # RELEASE MODE

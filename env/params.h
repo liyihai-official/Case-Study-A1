@@ -49,6 +49,7 @@ namespace tQR_project
   using Char        = char;
   using Bool        = bool;
   using String      = std::string;
+  using Void        = void;
 
   // Define types
   typedef Dword   size_type;
