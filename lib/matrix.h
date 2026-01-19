@@ -81,6 +81,8 @@ public:
     return;
   };
 
+
+  
   friend std::ostream & operator<<(std::ostream &os, const Matrix &mt) {
     os << "Matrix: " << mt.numR_ << " x " << mt.numC_ << std::endl;
     for (tQR_project::size_type i = 0; i < mt.numR_; ++i) {
