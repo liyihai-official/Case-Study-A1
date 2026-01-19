@@ -1,37 +1,58 @@
 cmake_minimum_required(VERSION 3.10)
 project(CaseStudy_A1_tQR_Factorization VERSION 0.1 LANGUAGES CXX)
 
-set(PROJECT_AUTHOR "LI YIHAI")
-
-# Find Packages
-find_package(MPI REQUIRED)
-# if (MPI_FOUND)
-#   message(STATUS "MPI found")
-#   set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
-# else()
-#   message(FATAL_ERROR "MPI not found")
-
-# C++ Standard Required C++ 17
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CXX_COMPILER_PATH ${CMAKE_CXX_COMPILER})
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(PROJECT_SOURCES 
-  test.cc 
+# 关键：先指定 BLAS 供应商，再 find_package(BLAS)
+set(BLA_VENDOR OpenBLAS)
+
+# 如果你用的是 Homebrew，建议把前缀加入搜索路径（可选但很推荐）
+list(APPEND CMAKE_PREFIX_PATH
+  "/opt/homebrew/opt/openblas"
+  "/opt/homebrew/opt/lapack"
 )
 
-# Compile Flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+find_package(MPI REQUIRED)
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
 
-# EXECS 
-add_executable(TEST test.cc ${PROJECT_SOURCES})
+add_executable(TEST test.cc)
 
-# Link MPI
-if(MPI_FOUND)
-  target_link_libraries(TEST PRIVATE MPI::MPI_CXX)
+# 编译选项不要全局拼 CMAKE_CXX_FLAGS，改用 target 级别
+target_compile_options(TEST PRIVATE -O3)
+
+# 1) 解决 lapacke.h：显式找 header
+find_path(LAPACKE_INCLUDE_DIR
+  NAMES lapacke.h
+  PATHS
+    "/opt/homebrew/opt/lapack/include"
+    "/opt/homebrew/include"
+)
+
+# 2) 解决 liblapacke：显式找库
+find_library(LAPACKE_LIBRARY
+  NAMES lapacke
+  PATHS
+    "/opt/homebrew/opt/lapack/lib"
+    "/opt/homebrew/lib"
+)
+
+if (NOT LAPACKE_INCLUDE_DIR)
+  message(FATAL_ERROR "Cannot find lapacke.h. Try: brew install lapack")
 endif()
 
-# RELEASE MODE
-if (CMAKE_BUILD_TYPE STREQUAL "Release")
-  target_compile_definitions(TEST PRIVATE NDEBUG)
+if (NOT LAPACKE_LIBRARY)
+  message(FATAL_ERROR "Cannot find liblapacke. Try: brew install lapack")
 endif()
+
+target_include_directories(TEST PRIVATE
+  ${LAPACKE_INCLUDE_DIR}
+)
+
+target_link_libraries(TEST PRIVATE
+  MPI::MPI_CXX
+  ${LAPACKE_LIBRARY}     # 先 lapacke（你 include 了 lapacke.h，通常需要）
+  ${LAPACK_LIBRARIES}    # 再 LAPACK
+  ${BLAS_LIBRARIES}      # 最后 BLAS(OpenBLAS)
+)
