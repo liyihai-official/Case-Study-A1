@@ -125,6 +125,23 @@ public:
     return;
   }
 
+  tQR_project::size_type GetNumElements() const { return num_elem_; }
+  tQR_project::size_type GetNumRows()     const { return numR_; }
+  tQR_project::size_type GetNumCols()     const { return numC_; }
+
+
+  // ptr
+  tQR_project::elem_type* GetDataPointer() noexcept { return data_.data(); }
+  const tQR_project::elem_type* GetDataPointer() const noexcept { return data_.data(); }
+
+
+  // elem
+  tQR_project::elem_type& GetElement(tQR_project::size_type row, tQR_project::size_type col) noexcept 
+  { return data_[row * numC_ + col]; }
+  const tQR_project::elem_type& GetElement(tQR_project::size_type row, tQR_project::size_type col) const noexcept 
+  { return data_[row * numC_ + col]; }
+
+  // << and Show
   tQR_project::Void Show() 
   {
     std::cout << "DataHandler show function called." << std::endl;
@@ -141,14 +158,18 @@ public:
     return;
   };
 
+  friend std::ostream & operator<<(std::ostream &os, const DataHandler &dh) {
+    os << "DataHandler: " << dh.GetNumRows() << " x " << dh.GetNumCols() 
+       << ", Total elements: " << dh.GetNumElements() << std::endl;
+    for (tQR_project::size_type i = 0; i < dh.GetNumRows(); ++i) {
+      for (tQR_project::size_type j = 0; j < dh.GetNumCols(); ++j) {
+        os << dh.GetElement(i, j) << " ";
+      }
+      os << std::endl;
+    }
+    return os;
+  }
 
-  tQR_project::size_type GetNumElements() const { return num_elem_; }
-  tQR_project::size_type GetNumRows()     const { return numR_; }
-  tQR_project::size_type GetNumCols()     const { return numC_; }
-
-
-  tQR_project::elem_type* GetDataPointer() noexcept { return data_.data(); }
-  const tQR_project::elem_type* GetDataPointer() const noexcept { return data_.data(); }
 
 
 private:
