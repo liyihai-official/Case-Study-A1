@@ -146,7 +146,10 @@ public:
   tQR_project::size_type GetNumRows()     const { return numR_; }
   tQR_project::size_type GetNumCols()     const { return numC_; }
 
-  tQR_project::elem_type* GetDataPointer() { return data_.data(); }
+
+  tQR_project::elem_type* GetDataPointer() noexcept { return data_.data(); }
+  const tQR_project::elem_type* GetDataPointer() const noexcept { return data_.data(); }
+
 
 private:
   std::vector<tQR_project::elem_type> data_;
