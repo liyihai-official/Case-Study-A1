@@ -54,6 +54,7 @@ public:
   ///
   /// @brief Parameterized constructor from DataHandler
   /// @param dh DataHandler object
+  ///
   Matrix(const DataHandler& dh) 
   {
     std::cout << "Matrix parameterized constructor called." << std::endl;
@@ -65,6 +66,12 @@ public:
 
   /// Other member functions to be implemented as needed
   
+
+
+  tQR_project::size_type GetNumElements() const { return data_.size(); }
+  tQR_project::size_type GetNumRows()     const { return numR_; }
+  tQR_project::size_type GetNumCols()     const { return numC_; }
+
   // << and Show
   tQR_project::Void Show() const 
   {
@@ -82,7 +89,7 @@ public:
   };
 
 
-  
+
   friend std::ostream & operator<<(std::ostream &os, const Matrix &mt) {
     os << "Matrix: " << mt.numR_ << " x " << mt.numC_ << std::endl;
     for (tQR_project::size_type i = 0; i < mt.numR_; ++i) {
@@ -103,6 +110,7 @@ public:
   { return data_[row * numC_ + col]; }
   const tQR_project::elem_type& GetElement(tQR_project::size_type row, tQR_project::size_type col) const noexcept 
   { return data_[row * numC_ + col]; }
+
 
 
 private:

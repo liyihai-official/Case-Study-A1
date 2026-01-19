@@ -182,9 +182,6 @@ private:
 
 
 
-
-
-
 /// @brief Copy constructor
 /// @param other 
 inline
