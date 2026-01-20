@@ -13,11 +13,15 @@ set_property(CACHE DEBUG_LOG_MODE PROPERTY STRINGS AUTO ON OFF)
 add_library(tqr_build_options INTERFACE)
 add_library(tqr::build_options ALIAS tqr_build_options)
 
+# target_compile_definitions(tqr_build_options INTERFACE
+#   DEBUG_LOG=$<IF:$<STREQUAL:${DEBUG_LOG_MODE},ON>,1,
+#              $<IF:$<STREQUAL:${DEBUG_LOG_MODE},OFF>,0,
+#                   $<IF:$<CONFIG:Debug>,1,0>>>
+# )
 target_compile_definitions(tqr_build_options INTERFACE
-  DEBUG_LOG=$<IF:$<STREQUAL:${DEBUG_LOG_MODE},ON>,1,
-             $<IF:$<STREQUAL:${DEBUG_LOG_MODE},OFF>,0,
-                  $<IF:$<CONFIG:Debug>,1,0>>>
+  "DEBUG_LOG=$<IF:$<STREQUAL:${DEBUG_LOG_MODE},ON>,1,$<IF:$<STREQUAL:${DEBUG_LOG_MODE},OFF>,0,$<IF:$<CONFIG:Debug>,1,0>>>"
 )
+
 
 # -------------------------------------
 # 2) BLAS/LAPACK/MPI
