@@ -3,7 +3,7 @@
 /// @brief
 ///
 /// @author LI YIHAI
-/// @version 0.1
+/// @version 0.2
 /// @date 2026-01-19 
 ///
 #ifndef MATRIX_H
@@ -65,8 +65,6 @@ public:
   } 
 
   /// Other member functions to be implemented as needed
-  
-
 
   tQR_project::size_type GetNumElements() const { return data_.size(); }
   tQR_project::size_type GetNumRows()     const { return numR_; }

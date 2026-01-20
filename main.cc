@@ -51,7 +51,7 @@ int main ()
       static_cast<tQR_project::Int>(dh.GetNumCols()), 
       mt_A.GetDataPointer(),      // Placeholder for data pointer
       static_cast<tQR_project::Int>(dh.GetNumCols()), 
-      mt_tau.GetDataPointer()   // Placeholder for tau pointer
+      mt_tau.GetDataPointer()     // Placeholder for tau pointer
     );
 
     LAPACKE_dormqr(LAPACK_ROW_MAJOR, 'L', 'T', 
