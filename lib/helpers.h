@@ -7,6 +7,10 @@
 #include <unistd.h>
 #include <iomanip>
 
+#ifndef DEBUG_LOG
+#define DEBUG_LOG 0
+#endif
+
 namespace tQR_project {
 
   void sleeper(tQR_project::size_type seconds) {
