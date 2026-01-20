@@ -4,11 +4,16 @@
 #include "../env/params.h"
 #include "datahandler.h"
 #include "matrix.h"
-
+#include <unistd.h>
 #include <iomanip>
 
 namespace tQR_project {
 
+  void sleeper(tQR_project::size_type seconds) {
+    std::cout << "====================================================";
+    sleep(seconds);
+    std::cout << std::endl;
+  }
   // std::ostream & operator<<(std::ostream &os, const DataHandler &dh) {
   //   os << "DataHandler: " << dh.GetNumRows() << " x " << dh.GetNumCols() 
   //      << ", Total elements: " << dh.GetNumElements() << std::endl;
