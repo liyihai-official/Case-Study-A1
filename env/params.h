@@ -23,9 +23,19 @@
 #undef MATC
 #undef MATR
 
-#define MATC 1000  // Matrix Col size
-#define MATR 10000 // Matrix Row 
+#define MATC 111  // Matrix Col size
+#define MATR 1217 // Matrix Row 
 
+
+///
+/// MATCFULL: Full Matrix Col size for testing
+/// MATRFULL: Full Matrix Row size for testing
+///
+#undef MATCFULL
+#undef MATRFULL
+
+#define MATCFULL 1000  // Matrix Col size
+#define MATRFULL 10000 // Matrix Row 
 
 ///
 /// Datatype of elements
