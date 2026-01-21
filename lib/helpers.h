@@ -11,14 +11,14 @@
 #define DEBUG_LOG 0
 #endif
 
-namespace tQR_project {
+namespace tsqr {
 
-  void sleeper(tQR_project::size_type seconds) {
+  void sleeper(tsqr::size_type seconds) {
     std::cout << "====================================================";
     sleep(seconds);
     std::cout << std::endl;
   }
-} // end of namespace tQR_project
+} // end of namespace tsqr
 
 
 

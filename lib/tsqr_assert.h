@@ -2,8 +2,8 @@
 ///
 ///
 ///
-#ifndef ASSERT_H
-#define ASSERT_H
+#ifndef TSQR_ASSERT_H
+#define TSQR_ASSERT_H
 
 /// includes
 #include <cassert>
@@ -35,4 +35,4 @@
     assert(expr); \
   }
 
-#endif // ASSERT_H
+#endif // TSQR_ASSERT_H

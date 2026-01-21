@@ -36,7 +36,7 @@ public:
   ~DataHandler() { std::cout << "DataHandler destructor called." << std::endl; }; // destructor
 
   // Constructor: Load data from file 
-  DataHandler(const tQR_project::String& filename) 
+  DataHandler(const tsqr::String& filename) 
   {
     std::cout << "DataHandler parameterized constructor called." << std::endl;
     std::ifstream infile(filename);
@@ -45,7 +45,7 @@ public:
       return;
     }
 
-    tQR_project::elem_type value;
+    tsqr::elem_type value;
     while (infile >> value) {
       data_.push_back(value);
     }
@@ -62,7 +62,7 @@ public:
   /// @brief Reshape data into matrix form
   /// @param rows Number of rows
   /// @param cols Number of columns
-  tQR_project::Void Reshape(tQR_project::size_type rows, tQR_project::size_type cols) 
+  tsqr::Void Reshape(tsqr::size_type rows, tsqr::size_type cols) 
   {
     if (rows * cols != num_elem_) {
       std::cerr << "Reshape error: total elements do not match." << std::endl;
@@ -77,7 +77,7 @@ public:
   /// @brief Split a head portion of data as a new DataHandler object
   /// @param count Number of elements to split
   /// @return New DataHandler object containing the split data
-  DataHandler Split_head(tQR_project::size_type count) 
+  DataHandler Split_head(tsqr::size_type count) 
   {
     DataHandler new_handler;
     if (count > num_elem_) {
@@ -97,7 +97,7 @@ public:
   /// @brief Split a tail portion of data as a new DataHandler object
   /// @param count Number of elements to split
   /// @return New DataHandler object containing the split data
-  DataHandler Split_tail(tQR_project::size_type count)
+  DataHandler Split_tail(tsqr::size_type count)
   {
     DataHandler new_handler;
     if (count > num_elem_) {
@@ -113,43 +113,43 @@ public:
     return new_handler;
   };
 
-  tQR_project::Void Fill(tQR_project::elem_type value) 
+  tsqr::Void Fill(tsqr::elem_type value) 
   {
     std::fill(data_.begin(), data_.end(), value);
     return;
   };
 
-  tQR_project::Void Fill_Zero()
+  tsqr::Void Fill_Zero()
   {
-    Fill(static_cast<tQR_project::elem_type>(0));
+    Fill(static_cast<tsqr::elem_type>(0));
     return;
   }
 
-  tQR_project::size_type GetNumElements() const { return num_elem_; }
-  tQR_project::size_type GetNumRows()     const { return numR_; }
-  tQR_project::size_type GetNumCols()     const { return numC_; }
+  tsqr::size_type GetNumElements() const { return num_elem_; }
+  tsqr::size_type GetNumRows()     const { return numR_; }
+  tsqr::size_type GetNumCols()     const { return numC_; }
 
 
   // ptr
-  tQR_project::elem_type* GetDataPointer() noexcept { return data_.data(); }
-  const tQR_project::elem_type* GetDataPointer() const noexcept { return data_.data(); }
+  tsqr::elem_type* GetDataPointer() noexcept { return data_.data(); }
+  const tsqr::elem_type* GetDataPointer() const noexcept { return data_.data(); }
 
 
   // elem
-  tQR_project::elem_type& GetElement(tQR_project::size_type row, tQR_project::size_type col) noexcept 
+  tsqr::elem_type& GetElement(tsqr::size_type row, tsqr::size_type col) noexcept 
   { return data_[row * numC_ + col]; }
-  const tQR_project::elem_type& GetElement(tQR_project::size_type row, tQR_project::size_type col) const noexcept 
+  const tsqr::elem_type& GetElement(tsqr::size_type row, tsqr::size_type col) const noexcept 
   { return data_[row * numC_ + col]; }
 
   // << and Show
-  tQR_project::Void Show() 
+  tsqr::Void Show() 
   {
     std::cout << "DataHandler show function called." << std::endl;
     std::cout << "Number of elements: " << num_elem_ << std::endl;
     std::cout << "Number of Rows: " << numR_ << std::endl;
     std::cout << "Number of Columns: " << numC_ << std::endl;
     std::cout << "Data: " << std::endl;
-    for (tQR_project::size_type i = 0; i < num_elem_; ++i) {
+    for (tsqr::size_type i = 0; i < num_elem_; ++i) {
       std::cout << data_[i] << " ";
       if ((i + 1) % numC_ == 0) {
         std::cout << std::endl;
@@ -161,8 +161,8 @@ public:
   friend std::ostream & operator<<(std::ostream &os, const DataHandler &dh) {
     os << "DataHandler: " << dh.GetNumRows() << " x " << dh.GetNumCols() 
        << ", Total elements: " << dh.GetNumElements() << std::endl;
-    for (tQR_project::size_type i = 0; i < dh.GetNumRows(); ++i) {
-      for (tQR_project::size_type j = 0; j < dh.GetNumCols(); ++j) {
+    for (tsqr::size_type i = 0; i < dh.GetNumRows(); ++i) {
+      for (tsqr::size_type j = 0; j < dh.GetNumCols(); ++j) {
         os << dh.GetElement(i, j) << " ";
       }
       os << std::endl;
@@ -173,8 +173,8 @@ public:
 
 
 private:
-  std::vector<tQR_project::elem_type> data_;
-  tQR_project::size_type num_elem_ {0}, numR_ {0}, numC_ {0};
+  std::vector<tsqr::elem_type> data_;
+  tsqr::size_type num_elem_ {0}, numR_ {0}, numC_ {0};
 }; // end of class DataHandler
 
 

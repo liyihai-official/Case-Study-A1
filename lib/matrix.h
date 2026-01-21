@@ -53,10 +53,10 @@ public:
   /// @brief Parameterized constructor from dimensions
   /// @param rows Number of rows
   /// @param cols Number of columns
-  Matrix(tQR_project::size_type rows, tQR_project::size_type cols) 
+  Matrix(tsqr::size_type rows, tsqr::size_type cols) 
     : 
     numR_(rows), numC_(cols), 
-    data_(rows * cols, static_cast<tQR_project::elem_type>(0)) 
+    data_(rows * cols, static_cast<tsqr::elem_type>(0)) 
   {
     #ifdef DEBUG_LOG
     std::cout 
@@ -69,7 +69,7 @@ public:
   /// @param rows Number of rows
   /// @param cols Number of columns
   /// @param value Initial value to fill
-  Matrix(tQR_project::size_type rows, tQR_project::size_type cols, tQR_project::elem_type value) 
+  Matrix(tsqr::size_type rows, tsqr::size_type cols, tsqr::elem_type value) 
     : 
     numR_(rows), 
     numC_(cols), 
@@ -93,21 +93,21 @@ public:
     #endif
     numR_ = dh.GetNumRows();
     numC_ = dh.GetNumCols();
-    data_ = std::vector<tQR_project::elem_type>(dh.GetDataPointer(), 
+    data_ = std::vector<tsqr::elem_type>(dh.GetDataPointer(), 
               dh.GetDataPointer() + dh.GetNumElements());
   } 
 
   /// Other member functions to be implemented as needed
 
-  tQR_project::size_type 
+  tsqr::size_type 
   GetNumElements() 
   const { return data_.size(); }
   
-  tQR_project::size_type 
+  tsqr::size_type 
   GetNumRows()     
   const { return numR_; }
   
-  tQR_project::size_type 
+  tsqr::size_type 
   GetNumCols()     
   const { return numC_; }
 
@@ -115,9 +115,9 @@ public:
   
   ///
   /// @brief Print matrix to console
-  /// @return tQR_project::Void
+  /// @return tsqr::Void
   ///
-  tQR_project::Void 
+  tsqr::Void 
   Show() const 
   {
     #ifdef DEBUG_LOG
@@ -127,8 +127,8 @@ public:
     std::cout << "Data: " << std::endl;
     #endif
 
-    for (tQR_project::size_type i = 0; i < numR_; ++i) {
-      for (tQR_project::size_type j = 0; j < numC_; ++j) {
+    for (tsqr::size_type i = 0; i < numR_; ++i) {
+      for (tsqr::size_type j = 0; j < numC_; ++j) {
         std::cout << data_[i * numC_ + j] << " ";
       }
       std::cout << std::endl;
@@ -145,8 +145,8 @@ public:
   ///
   friend std::ostream & operator<<(std::ostream &os, const Matrix &mt) {
     os << std::endl;
-    for (tQR_project::size_type i = 0; i < mt.numR_; ++i) {
-      for (tQR_project::size_type j = 0; j < mt.numC_; ++j) {
+    for (tsqr::size_type i = 0; i < mt.numR_; ++i) {
+      for (tsqr::size_type j = 0; j < mt.numC_; ++j) {
         os << mt.data_[i * mt.numC_ + j] << " ";
       }
       os << std::endl;
@@ -156,45 +156,45 @@ public:
   }
 
   // ptr operations
-  tQR_project::elem_type* 
+  tsqr::elem_type* 
   GetDataPointer() 
   noexcept { return data_.data(); }
   
-  const tQR_project::elem_type* 
+  const tsqr::elem_type* 
   GetDataPointer() 
   const noexcept { return data_.data(); }  
 
-  tQR_project::elem_type* 
-  RowPtr(tQR_project::size_type r) 
+  tsqr::elem_type* 
+  RowPtr(tsqr::size_type r) 
   noexcept { return data_.data() + r * numC_; }
   
-  const tQR_project::elem_type* 
-  RowPtr(tQR_project::size_type r) 
+  const tsqr::elem_type* 
+  RowPtr(tsqr::size_type r) 
   const noexcept { return data_.data() + r * numC_; }
   
   ///
   /// @brief Refers to the size of the Major Dimension (Row)
   /// @return Leading dimension (Row Major)
   ///
-  tQR_project::size_type 
+  tsqr::size_type 
   LdaRowMajor() // Leading Dimension (Row Major)
   const noexcept { return numC_; }
 
 
   // elem operations
-  tQR_project::elem_type& 
-  GetElement(tQR_project::size_type row, tQR_project::size_type col) 
+  tsqr::elem_type& 
+  GetElement(tsqr::size_type row, tsqr::size_type col) 
   noexcept { return data_[row * numC_ + col]; }
 
-  const tQR_project::elem_type& 
-  GetElement(tQR_project::size_type row, tQR_project::size_type col) 
+  const tsqr::elem_type& 
+  GetElement(tsqr::size_type row, tsqr::size_type col) 
   const noexcept { return data_[row * numC_ + col]; }
 
 
 
 private:
-  tQR_project::size_type numR_ {0}, numC_ {0};
-  std::vector<tQR_project::elem_type> data_;
+  tsqr::size_type numR_ {0}, numC_ {0};
+  std::vector<tsqr::elem_type> data_;
 }; // end of class Matrix
 
 #endif // MATRIX_H

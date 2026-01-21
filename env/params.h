@@ -40,7 +40,7 @@
 ///
 /// Datatype of elements
 ///
-namespace tQR_project
+namespace tsqr
 {
   // Type Aliases
   using Byte  = uint8_t;
