@@ -1,16 +1,28 @@
 ///
+/// @file tsqr_assert.h
+/// @brief tsqr custom assert macros and handlers
+///         tsqr LOG macro for debugging
 ///
-///
+/// @author LI YIHAI
+/// @version 0.1
+/// @date 2026-01-21
 ///
 #ifndef TSQR_ASSERT_H
 #define TSQR_ASSERT_H
 
 /// includes
-#include <cassert>
 #include <iostream>
+#include <cassert>
 #include <cstdlib>
 #include "../env/params.h"
 
+/// 
+/// -------------------------------------------------------------
+/// Logging
+/// -------------------------------------------------------------
+///
+/// @brief Custom Logging information handler
+/// 
 
 /// @brief Logging macro for debugging
 /// @param msg Message to log
@@ -23,6 +35,17 @@
 #endif
 
 
+
+/// 
+/// -------------------------------------------------------------
+/// Assertions
+/// -------------------------------------------------------------
+///
+/// @brief Custom assert failure handler
+/// 
+
+namespace tsqr {
+namespace details {
 
 /// @brief Custom assert failure handler
 /// @param expr_str Expression string that failed
@@ -51,13 +74,19 @@ tsqr_assert_fail(
   std::abort();
 }
 
+} // end of namespace details
+} // end of namespace tsqr
+
+
+
+
 /// @brief Custom assert macro for debugging
 /// @param expr Expression to assert
 #define TSQR_ASSERT(expr)                         \
   do {                                            \
     const tsqr::Bool _tsqr_ok = static_cast<tsqr::Bool>(expr); \
     if (!_tsqr_ok) {                              \
-      ::tsqr_assert_fail(                         \
+      ::tsqr::details::tsqr_assert_fail(          \
         #expr, __FILE__, __LINE__, nullptr);      \
     }                                             \
   } while (0)
@@ -69,7 +98,7 @@ tsqr_assert_fail(
   do {                                            \
     const tsqr::Bool _tsqr_ok = static_cast<tsqr::Bool>(expr); \
     if (!_tsqr_ok) {                              \
-      ::tsqr_assert_fail(                         \
+      ::tsqr::details::tsqr_assert_fail(          \
         #expr, __FILE__, __LINE__, (msg));        \
     }                                             \
   } while (0)  
