@@ -163,7 +163,7 @@ public:
   const noexcept { return numC_; }
 
 
-  // elem operations
+  // elem accesses
   tsqr::elem_type& 
   GetElement(tsqr::size_type row, tsqr::size_type col) 
   noexcept { return data_[row * numC_ + col]; }
@@ -172,8 +172,15 @@ public:
   GetElement(tsqr::size_type row, tsqr::size_type col) 
   const noexcept { return data_[row * numC_ + col]; }
 
+  // elem operations
+  tsqr::Void 
+  Fill(tsqr::elem_type value)
+  { std::fill(data_.begin(), data_.end(), value); }
 
-
+  tsqr::Void
+  Fill_Zero()
+  { Fill(static_cast<tsqr::elem_type>(0)); }
+  
 private:
   tsqr::size_type numR_ {0}, numC_ {0};
   std::vector<tsqr::elem_type> data_;
