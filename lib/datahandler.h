@@ -17,7 +17,7 @@
 #include <utility>
 
 #include "../env/params.h"
-
+#include "tsqr_assert.h"
 
 ///
 /// @brief Datahandler
@@ -27,18 +27,22 @@
 ///
 class DataHandler {
 public:
-  DataHandler() {  std::cout << "DataHandler default constructor called." << std::endl; }; // default empty constructor
+  DataHandler() {  // ctor 
+    LOG("DataHandler default constructor called." )
+  }; 
+  ~DataHandler() { // dtor 
+    LOG("DataHandler destructor called." )
+  }; 
+
   DataHandler(const DataHandler&);            // copy constructor
   DataHandler& operator=(const DataHandler&); // copy assignment
   DataHandler(DataHandler&&) noexcept;                 // move constructor
   DataHandler& operator=(DataHandler&&) noexcept;      // move assignment
 
-  ~DataHandler() { std::cout << "DataHandler destructor called." << std::endl; }; // destructor
-
   // Constructor: Load data from file 
   DataHandler(const tsqr::String& filename) 
   {
-    std::cout << "DataHandler parameterized constructor called." << std::endl;
+    LOG("DataHandler parameterized constructor called." );
     std::ifstream infile(filename);
     if (!infile) {
       std::cerr << "Error opening file: " << filename << std::endl;
