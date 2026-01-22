@@ -26,10 +26,10 @@ class Matrix {
 public:
   
   Matrix()  { // ctor
-    LOG("Matrix default constructor called." ) 
+    TSQR_LOG("Matrix default constructor called." ) 
   }; 
   ~Matrix() { // dtor
-    LOG("Matrix destructor called." )
+    TSQR_LOG("Matrix destructor called." )
   };   
 
   Matrix(const Matrix&);              // copy constructor
@@ -47,7 +47,7 @@ public:
     numR_(rows), numC_(cols), 
     data_(rows * cols, static_cast<tsqr::elem_type>(0)) 
   {
-    LOG("Matrix parameterized constructor called." )
+    TSQR_LOG("Matrix parameterized constructor called." )
   }
 
   /// @brief Parameterized constructor from dimensions and initial value
@@ -60,7 +60,7 @@ public:
     numC_(cols), 
     data_(rows * cols, value) 
   {
-    LOG("Matrix parameterized constructor with value called." )
+    TSQR_LOG("Matrix parameterized constructor with value called." )
   }
   
   ///
@@ -69,7 +69,7 @@ public:
   ///
   Matrix(const DataHandler& dh) 
   {
-    LOG("Matrix parameterized constructor from DataHandler called." )
+    TSQR_LOG("Matrix parameterized constructor from DataHandler called." )
     numR_ = dh.GetNumRows();
     numC_ = dh.GetNumCols();
     data_ = std::vector<tsqr::elem_type>(dh.GetDataPointer(), 
@@ -180,7 +180,7 @@ public:
   tsqr::Void
   Fill_Zero()
   { Fill(static_cast<tsqr::elem_type>(0)); }
-  
+
 private:
   tsqr::size_type numR_ {0}, numC_ {0};
   std::vector<tsqr::elem_type> data_;

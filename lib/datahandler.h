@@ -28,10 +28,10 @@
 class DataHandler {
 public:
   DataHandler() {  // ctor 
-    LOG("DataHandler default constructor called." )
+    TSQR_LOG("DataHandler default constructor called." )
   }; 
   ~DataHandler() { // dtor 
-    LOG("DataHandler destructor called." )
+    TSQR_LOG("DataHandler destructor called." )
   }; 
 
   DataHandler(const DataHandler&);            // copy constructor
@@ -42,7 +42,7 @@ public:
   // Constructor: Load data from file 
   DataHandler(const tsqr::String& filename) 
   {
-    LOG("DataHandler parameterized constructor called." );
+    TSQR_LOG("DataHandler parameterized constructor called." );
     std::ifstream infile(filename);
     if (!infile) {
       std::cerr << "Error opening file: " << filename << std::endl;

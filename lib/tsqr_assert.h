@@ -14,7 +14,6 @@
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
-#include "../env/params.h"
 
 /// 
 /// -------------------------------------------------------------
@@ -27,10 +26,10 @@
 /// @brief Logging macro for debugging
 /// @param msg Message to log
 #if DEBUG_LOG
-#define LOG(msg) \
+#define TSQR_LOG(msg) \
   std::cout << "[LOG] " << msg << std::endl;
 #else 
-  #define LOG(msg) \
+  #define TSQR_LOG(msg) \
   do {} while(0)
 #endif
 
