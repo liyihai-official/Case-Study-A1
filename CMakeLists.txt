@@ -79,9 +79,13 @@ target_link_libraries(tqr
 # -------------------------------------
 add_executable(TEST test.cc)
 add_executable(MAIN main.cc)
+add_executable(TREE tree_reduce.cc)
+
 
 target_link_libraries(TEST PRIVATE tqr::tqr)
 target_link_libraries(MAIN PRIVATE tqr::tqr)
+target_link_libraries(TREE PRIVATE tqr::tqr)
 
 target_compile_options(TEST PRIVATE -O3)
 target_compile_options(MAIN PRIVATE -O3)
+target_compile_options(TREE PRIVATE -O3)
